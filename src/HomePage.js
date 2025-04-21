@@ -50,7 +50,6 @@ function HomePage() {
 
   return (
     <div>
-      <h1>What's for Dinner?</h1>
       {loading && <p>Loading upcoming meals...</p>}
 
       <button onClick={handlePickDinner} style={{ marginBottom: '1rem' }}>
