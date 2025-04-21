@@ -1,5 +1,5 @@
 # 🍽️ What's for Dinner?
-
+**WORK IN PROGRESS**
 A full-stack meal planning app built with **React** (frontend) and **ASP.NET Core Web API** (backend), designed to help you manage upcoming meals, generate grocery lists, and streamline dinner decisions.
 
 ---
