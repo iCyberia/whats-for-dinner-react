@@ -5,7 +5,7 @@ function GroceryListPage() {
   const [error, setError] = useState(null);
 
 useEffect(() => {
-  fetch('/api/upcomingmenu/grocerylist')
+  fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu/grocerylist`)
     .then((res) => {
       if (!res.ok) throw new Error('Failed to fetch grocery list');
       return res.json();

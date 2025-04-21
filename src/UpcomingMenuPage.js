@@ -6,9 +6,9 @@ function UpcomingMenuPage() {
   const [selectedMealId, setSelectedMealId] = useState('');
   const [error, setError] = useState(null);
 
-  // Load all meals for the dropdown
+  // Load all meals for the dropdownapi
   useEffect(() => {
-    fetch('/api/meals')
+    fetch(`${process.env.REACT_APP_API_BASE}/api/meals`)
       .then(res => res.json())
       .then(setAllMeals)
       .catch(() => setError('Failed to fetch meals.'));
@@ -16,7 +16,7 @@ function UpcomingMenuPage() {
 
   // Load upcoming meals
   const loadUpcoming = () => {
-    fetch('/api/upcomingmenu')
+    fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu`)
       .then(res => res.json())
       .then(setUpcomingMeals)
       .catch(() => setError('Failed to fetch upcoming meals.'));
@@ -29,7 +29,7 @@ function UpcomingMenuPage() {
   // Add a meal
   function handleAddMeal() {
     if (!selectedMealId) return;
-    fetch(`/api/upcomingmenu/${selectedMealId}`, {
+    fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu/${selectedMealId}`, {
       method: 'POST'
     })
       .then(() => {
@@ -41,7 +41,7 @@ function UpcomingMenuPage() {
 
   // Remove a meal
   function handleRemove(id) {
-    fetch(`/api/upcomingmenu/${id}`, {
+    fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu/${id}`, {
       method: 'DELETE'
     })
       .then(loadUpcoming)
@@ -51,7 +51,7 @@ function UpcomingMenuPage() {
   // Clear all meals
   function handleClearAll() {
     Promise.all(upcomingMeals.map(m => 
-      fetch(`/api/upcomingmenu/${m.id}`, { method: 'DELETE' })
+      fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu/${m.id}`, { method: 'DELETE' })
     ))
       .then(loadUpcoming)
       .catch(() => alert('Failed to clear meals'));

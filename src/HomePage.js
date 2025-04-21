@@ -5,23 +5,29 @@ function HomePage() {
   const [error, setError] = useState(null);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [showPrompt, setShowPrompt] = useState(false);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
-    fetch('/api/upcomingmenu')
-
+    fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu`)
       .then((res) => {
         if (!res.ok) throw new Error('Failed to fetch upcoming meals');
         return res.json();
       })
-      .then(setUpcomingMeals)
+      .then((data) => {
+        console.log("✅ API Response:", data);
+        setUpcomingMeals(data);
+      })
       .catch((err) => {
         console.error(err);
         setError('Failed to load upcoming menu');
-      });
+      })
+      .finally(() => setLoading(false)); // Always set loading to false
   }, []);
+  
 
   function handleEatMeal(id) {
-    fetch(`/api/upcomingmenu/${id}`, {
+    fetch(`${process.env.REACT_APP_API_BASE}/api/upcomingmenu/${id}`, {
       method: 'DELETE'
     })
       .then((res) => {
@@ -45,6 +51,7 @@ function HomePage() {
   return (
     <div>
       <h1>What's for Dinner?</h1>
+      {loading && <p>Loading upcoming meals...</p>}
 
       <button onClick={handlePickDinner} style={{ marginBottom: '1rem' }}>
         Pick Tonight's Dinner

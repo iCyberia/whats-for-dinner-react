@@ -23,8 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vs/
-
-
+deploy-react-to-unraid.sh
 
 # Logs
 npm-debug.log*
@@ -37,3 +36,5 @@ Thumbs.db
 
 # Node modules
 node_modules/
+
+.env.production
